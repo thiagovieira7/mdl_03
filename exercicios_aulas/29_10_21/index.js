@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.status(200).json({ message: "Que comece a bebedeira..." });
 });
 
-const cervejaRouter = require("cerveja");
+const cervejaRouter = require("./cerveja");
 app.use("/cerveja", cervejaRouter);
 
 const timeRouter = require("./time");
