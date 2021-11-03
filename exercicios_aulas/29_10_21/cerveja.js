@@ -1,35 +1,36 @@
 const express = require("express");
 const router = express.Router();
 
+
 let listaCervejas = ["ok"];
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "Cerveja trincando Ok" });
 });
 
-router.get("/cerveja/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   res.json(listaCervejas);
 });
 
-router.get("/cerveja/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = req.params.id;
   res.json(listaCervejas[id]);
 });
 
-router.get("/cerveja/:marca", (req, res) => {
+router.get("/:marca", (req, res) => {
   res.status(200).json(listaCervejas);
 });
 
-router.get("/cerveja/marca", (req, res) => {
+router.get("/marca", (req, res) => {
   const marca = req.params.marca;
   const cervejinha = listaCervejas.find((item) => item.marca === marca);
   res.status(200).json(cervejinha);
 });
 
-router.get("/cervejaindex/:marca", (req, res) => {
+router.get("/:marca", (req, res) => {
   const marca = req.params.marca;
   const index = listaCervejas.findIndex((item) => item.marca === marca);
-  if (index == -1) {
+  if (!index == -1) {
     res.status(204);
     return;
   }
@@ -42,7 +43,7 @@ router.post("/", (req, res) => {
   res.status(201).json({ message: "Cerveja cadastrada com sucesso..." });
 });
 
-router.put("/cerveja/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const id = req.params.id;
   const cervejinha = listaCervejas[id];
   listaCervejas[id] = req.body;
