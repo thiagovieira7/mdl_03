@@ -12,11 +12,11 @@ app.get("/", (req, res) => {
 const cervejaRouter = require("./cerveja");
 app.use("/cerveja", cervejaRouter);
 
-// const timeRouter = require("./time");
-// app.use("/time", timeRouter);
+const timeRouter = require("./time");
+app.use("/time", timeRouter);
 
-// const musicasRouter = require("./musicas");
-// app.use("/musicas", musicasRouter);
+const musicaRouter = require("./musica");
+app.use("/musica", musicaRouter);
 
 app.listen(port, () => {
   console.info(`App rodando em http://localhost:${port}`);

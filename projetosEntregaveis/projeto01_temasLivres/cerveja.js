@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-let listaCervejas = ["ok"];
+let listaCervejas = [""];
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "Cerveja trincando Ok" });
@@ -16,7 +16,7 @@ router.get("/:id", (req, res) => {
   res.json(listaCervejas[id]);
 });
 
-router.get("/lista:marca", (req, res) => {
+router.get("/lista/:marca", (req, res) => {
   res.status(200).json(listaCervejas);
 });
 
@@ -38,18 +38,25 @@ router.get("/marca", (req, res) => {
 
 router.post("/lista", (req, res) => {
   const cervejinha = req.body;
+  if (!cervejinha.marca) {
+    res.status(400).send({
+      message:
+        "Marca inválida. Certifique-se de que o body da requisição possui a MARCA...",
+    });
+    return;
+  }
   listaCervejas.push(cervejinha);
   res.status(201).json({ message: "Cerveja cadastrada com sucesso..." });
 });
 
-router.put("/:id", (req, res) => {
+router.put("/lista/:id", (req, res) => {
   const id = req.params.id;
   const cervejinha = listaCervejas[id];
   listaCervejas[id] = req.body;
   res.status(200).json({ message: `Cerveja alterada: ${listaCervejas[id]}` });
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/lista/:id", (req, res) => {
   const id = req.params.id;
   delete listaCervejas[id];
   console.log(listaCervejas[id]);
