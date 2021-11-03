@@ -7,9 +7,9 @@ router.get("/", (req, res) => {
   res.status(200).json({ message: "Cerveja trincando Ok" });
 });
 
-// router.get("/:id", (req, res) => {
-//   res.json(listaCervejas);
-// });
+router.get("/:id", (req, res) => {
+  res.json(listaCervejas);
+});
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;

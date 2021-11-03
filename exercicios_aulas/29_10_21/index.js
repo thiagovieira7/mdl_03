@@ -1,8 +1,6 @@
 //construir com temas de  cerveja / time / livre...
 const express = require("express");
 
-const router = express.Router();
-
 const app = express();
 const port = 3000;
 
@@ -15,11 +13,11 @@ app.get("/", (req, res) => {
 const cervejaRouter = require("cerveja");
 app.use("/cerveja", cervejaRouter);
 
-// const timeRouter = require("./time");
-// app.use("/time", timeRouter);
+const timeRouter = require("./time");
+app.use("/time", timeRouter);
 
-// const musicasRouter = require("./musicas");
-// app.use("/musicas", musicasRouter);
+const musicasRouter = require("./musicas");
+app.use("/musicas", musicasRouter);
 
 app.listen(port, () => {
   console.info(`App rodando em http://localhost:${port}`);
