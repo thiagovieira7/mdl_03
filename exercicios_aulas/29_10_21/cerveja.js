@@ -36,7 +36,7 @@ router.get("/marca", (req, res) => {
   res.status(200).json({ index: index });
 });
 
-router.post("/ lista", (req, res) => {
+router.post("/lista", (req, res) => {
   const cervejinha = req.body;
   listaCervejas.push(cervejinha);
   res.status(201).json({ message: "Cerveja cadastrada com sucesso..." });
@@ -50,7 +50,7 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-  const id = req.prams.id;
+  const id = req.params.id;
   delete listaCervejas[id];
   console.log(listaCervejas[id]);
   res.status(200).json(listaCervejas);
