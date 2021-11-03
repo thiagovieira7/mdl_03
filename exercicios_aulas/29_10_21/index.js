@@ -2,12 +2,12 @@
 const express = require("express");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "Que comece a bebedeira..." });
+  res.status({ message: "Que comece a bebedeira..." });
 });
 
 const cervejaRouter = require("./cerveja");

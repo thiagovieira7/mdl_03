@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/lista", (req, res) => {
-  res.json(200).json(listaCervejas);
+  res.json(listaCervejas);
 });
 
 router.get("/:id", (req, res) => {
@@ -36,7 +36,7 @@ router.get("/marca", (req, res) => {
   res.status(200).json({ index: index });
 });
 
-router.post("/", (req, res) => {
+router.post("/ lista", (req, res) => {
   const cervejinha = req.body;
   listaCervejas.push(cervejinha);
   res.status(201).json({ message: "Cerveja cadastrada com sucesso..." });
