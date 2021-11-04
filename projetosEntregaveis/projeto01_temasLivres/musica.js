@@ -1,7 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-let listaMusica = [""];
+let listaMusica = [
+  {
+    musica: "mulher de fases",
+    autor: "raimundos",
+    ano: 1996,
+    genero: "rock",
+  },
+];
 
 router.get("/", (req, res) => {
   res.status(200).json({ message: "Baile começou..." });
@@ -11,8 +18,8 @@ router.get("/listamusica", (req, res) => {
   res.json(listaMusica);
 });
 
-router.get("/:id", (req, res) => {
-  const id = req.params.id;
+router.get("/listamusica/:id", (req, res) => {
+  const id = req.params.id - 1;
   res.json(listaMusica[id]);
 });
 
@@ -38,26 +45,45 @@ router.get("/disco", (req, res) => {
 
 router.post("/listamusica", (req, res) => {
   const dance = req.body;
-  if (!dance.disco) {
+  if (!dance.musica) {
     res.status(400).send({
       message:
         "Musica inválida. Certifique-se de que o body da requisição possui a MUSICA...",
     });
     return;
+  } else if (!dance.autor) {
+    res.status(400).send({
+      message:
+        "Autor inválido. Certifique-se de que o body da requisição possui a AUTOR...",
+    });
+    return;
+  } else if (!dance.ano) {
+    res.status(400).send({
+      message:
+        "Ano inválido. Certifique-se de que o body da requisição possui a ANO...",
+    });
+    return;
+  } else if (!dance.genero) {
+    res.status(400).send({
+      message:
+        "Genero inválido. Certifique-se de que o body da requisição possui a GENERO...",
+    });
+    return;
   }
+
   listaMusica.push(dance);
   res.status(201).json({ message: "Musica cadastrada com sucesso..." });
 });
 
-router.put("/lista/:id", (req, res) => {
-  const id = req.params.id;
-  const dance = listaMusica[id];
-  listaMusica[id] = req.body;
+router.put("/listamusica/:id", (req, res) => {
+  const dance = req.body;
+  const id = req.params.id - 1;
+  listaMusica[id] = dance;
   res.status(200).json({ message: `Musica alterada: ${listaMusica[id]}` });
 });
 
-router.delete("/lista/:id", (req, res) => {
-  const id = req.params.id;
+router.delete("/listamusica/:id", (req, res) => {
+  const id = req.params.id - 1;
   delete listaMusica[id];
   console.log(listaMusica[id]);
   res.status(200).json(listaMusica);
