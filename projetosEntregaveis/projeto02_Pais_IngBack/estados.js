@@ -1,41 +1,41 @@
 const express = require("express");
 const router = express.Router();
 
-let listaCervejas = [
+let lista = [
   {
-    marca: "orginal",
-    fabricante: "brahma",
-    origem: "alemã",
-    fermentacao: "pilsen",
+    nome: "Paraná",
+    regiao: "Sul",
+    populacao: 11597484,
+    vlSalarioMin: 110195,
   },
 ];
 
 router.get("/", (req, res) => {
-  res.status(200).json({ message: "Cerveja trincando Ok" });
+  res.status(200).json({ message: "Dados por Estado" });
 });
 
-router.get("/listacerveja", (req, res) => {
-  res.json(listaCervejas);
+router.get("/lista", (req, res) => {
+  res.json(listas);
 });
 
-router.get("/listacerveja/:id", (req, res) => {
+router.get("/lista/:id", (req, res) => {
   const id = req.params.id - 1;
-  res.json(listaCervejas[id]);
+  res.json(listas[id]);
 });
 
-router.get("/listacerveja/:marca", (req, res) => {
-  res.status(200).json(listaCervejas);
+router.get("/lista/:nome", (req, res) => {
+  res.status(200).json(listas);
 });
 
-router.get("/:marca", (req, res) => {
-  const marca = req.params.marca;
-  const cervejinha = listaCervejas.find((item) => item.marca === marca);
-  res.status(200).json(cervejinha);
+router.get("/:nome", (req, res) => {
+  const nome = req.params.nome;
+  const estado = listas.find((item) => item.nome === nome);
+  res.status(200).json(estado);
 });
 
-router.get("/marca", (req, res) => {
-  const marca = req.params.marca;
-  const index = listaCervejas.findIndex((item) => item.marca === marca);
+router.get("/nome", (req, res) => {
+  const nome = req.params.nome;
+  const index = listas.findIndex((item) => item.nome === nome);
   if (index == -1) {
     res.status(204);
     return;
@@ -43,50 +43,52 @@ router.get("/marca", (req, res) => {
   res.status(200).json({ index: index });
 });
 
-router.post("/listacerveja", (req, res) => {
-  const cervejinha = req.body;
-  if (!cervejinha.marca) {
+router.post("/lista", (req, res) => {
+  const estado = req.body;
+  if (!estado.nome) {
     res.status(400).send({
       message:
-        "Marca inválida. Certifique-se de que o body da requisição possui a MARCA...",
+        "NOME DA ESTADO inválida. Certifique-se de que o body da requisição possui a infomação correta no campo (nome).",
     });
     return;
-  } else if (!cervejinha.fabricante) {
+  } else if (!estado.regiao) {
     res.status(400).send({
       message:
-        "Fabricante inválida. Certifique-se de que o body da requisição possui a FABRICANTE...",
+        "REGIAO inválida. Certifique-se de que o body da requisição possui a informação correta no campo (regiao).",
     });
     return;
-  } else if (!cervejinha.origem) {
+  } else if (!estado.populacao) {
     res.status(400).send({
       message:
-        "Origem inválida. Certifique-se de que o body da requisição possui a ORIGEM...",
+        "POPULACAO inválida. Certifique-se de que o body da requisição possui a informação correta no campo (populacao).",
     });
     return;
-  } else if (!cervejinha.fermentacao) {
+  } else if (!estado.vlSalarioMin) {
     res.status(400).send({
       message:
-        "Fermentação inválida. Certifique-se de que o body da requisição possui a FERMENTACAO...",
+        "VALOR DO SALARIO MINIMO inválido. Certifique-se de que o body da requisição possui a informação correta no campo (vlSalarioMin).",
     });
     return;
   }
 
-  listaCervejas.push(cervejinha);
-  res.status(201).json({ message: "Cerveja cadastrada com sucesso..." });
+  listas.push(estado);
+  res.status(201).json({ message: "Estado cadastrada com sucesso..." });
 });
 
-router.put("/listacerveja/:id", (req, res) => {
-  const cervejinha = req.body;
+router.put("/lista/:id", (req, res) => {
+  const estado = req.body;
   const id = req.params.id - 1;
-  listaCervejas[id] = cervejinha;
-  res.status(200).json({ message: `Cerveja alterada: ${listaCervejas[id]}` });
+  listas[id] = estado;
+  res
+    .status(200)
+    .json({ message: `Dados do Estado alterados com sucesso: ${listas[id]}` });
 });
 
-router.delete("/listacerveja/:id", (req, res) => {
+router.delete("/lista/:id", (req, res) => {
   const id = req.params.id - 1;
-  delete listaCervejas[id];
-  console.log(listaCervejas[id]);
-  res.status(200).json(listaCervejas);
+  delete listas[id];
+  console.log(listas[id]);
+  res.status(200).json(listas);
 });
 
 module.exports = router;

@@ -23,9 +23,9 @@ router.get("/lista/:id", (req, res) => {
   res.json(lista[id]);
 });
 
-// router.get("/lista/:nome", (req, res) => {
-//   res.status(200).json(listaCarros);
-// });
+router.get("/lista/:nome", (req, res) => {
+  res.status(200).json(lista);
+});
 
 router.get("/:nome", (req, res) => {
   const nome = req.params.nome;
@@ -48,31 +48,31 @@ router.post("/lista", (req, res) => {
   if (!pais.nome) {
     res.status(400).send({
       message:
-        "NOME do País inválido. Certifique-se que o body da requisição possui o NOME correto do país.",
+        "NOME DO PAÍS inválido. Certifique-se que o body da requisição possui o NOME correto do (pais).",
     });
     return;
   } else if (!pais.populacao) {
     res.status(400).send({
       message:
-        "POPULACAO inválido. Certifique-se de que o body da requisição possui o numero total de habitantes no campo POPULACAO.",
+        "POPULACAO inválida. Certifique-se de que o body da requisição possui o numero total de habitantes no campo (populacao).",
     });
     return;
   } else if (!pais.ligua_mae) {
     res.status(400).send({
       message:
-        "LINGUA_MAE inválida. Certifique-se de que o body da requisição possui a informação da lingua nativa corretamente no campo LINGUA_MAE...",
+        "IDIOMA NATIVO inválida. Certifique-se de que o body da requisição possui a informação da lingua nativa corretamente no campo (lingua_mae).",
     });
     return;
   } else if (!pais.pib) {
     res.status(400).send({
       message:
-        "PIB inválido. Certifique-se de que o body da requisição possui a informação com relação ao PIB do país...",
+        "PIB inválido. Certifique-se de que o body da requisição possui a informação do produto interno bruto no campo (pib).",
     });
     return;
   }
 
   lista.push(pais);
-  res.status(201).json({ message: "País cadastrada com sucesso..." });
+  res.status(201).json({ message: "País cadastradO com sucesso..." });
 });
 
 router.put("/lista/:id", (req, res) => {
@@ -81,7 +81,7 @@ router.put("/lista/:id", (req, res) => {
   lista[id] = pais;
   res
     .status(200)
-    .json({ message: `Informações sobre  alterada: ${lista[id]}` });
+    .json({ message: `Dados do país alterados com sucesso: ${lista[id]}` });
 });
 
 router.delete("/lista/:id", (req, res) => {

@@ -3,15 +3,15 @@ const router = express.Router();
 
 let lista = [
   {
-    nome: "Paraná",
-    regiao: "Sul",
-    populacao: 11597484,
-    valor_salario_minimo: 1101.95
+    nome: "Cascavel",
+    qtdBairros: 30,
+    populacao: 336073,
+    dtAniversario: 14 / 11 / 1951,
   },
 ];
 
 router.get("/", (req, res) => {
-  res.status(200).json({ message: "Dados por estado" });
+  res.status(200).json({ message: "Dados por cidade" });
 });
 
 router.get("/lista", (req, res) => {
@@ -29,13 +29,13 @@ router.get("/lista/:disco", (req, res) => {
 
 router.get("/:nome", (req, res) => {
   const nome = req.params.nome;
-  const estado = lista.find((item) => item.nome === nome);
-  res.status(200).json(estado);
+  const cidade = lista.find((item) => item.nome === nome);
+  res.status(200).json(cidade);
 });
 
 router.get("/nome", (req, res) => {
-  const nomeEstado = req.params.nome;
-  const index = lista.findIndex((item) => item.nomeEstado === nome);
+  const nomeCidade = req.params.nome;
+  const index = lista.findIndex((item) => item.nomeCidade === nome);
   if (index == -1) {
     res.status(204);
     return;
@@ -44,42 +44,44 @@ router.get("/nome", (req, res) => {
 });
 
 router.post("/lista", (req, res) => {
-  const estado = req.body;
-  if (!estado.musica) {
+  const cidade = req.body;
+  if (!cidade.nome) {
     res.status(400).send({
       message:
-        "Musica inválida. Certifique-se de que o body da requisição possui a MUSICA...",
+        "NOME inválido. Certifique-se de que o body da requisição possui o nome da cidade certa no campo (nome).",
     });
     return;
-  } else if (!estado.autor) {
+  } else if (!nome.qtdBairros) {
     res.status(400).send({
       message:
-        "Autor inválido. Certifique-se de que o body da requisição possui a AUTOR...",
+        "QUANTIDADE DE BAIRROS inválido. Certifique-se de que o body da requisição possui a quantidade de bairros certo no campo (qtdBairros).",
     });
     return;
-  } else if (!estado.ano) {
+  } else if (!estado.populacao) {
     res.status(400).send({
       message:
-        "Ano inválido. Certifique-se de que o body da requisição possui a ANO...",
+        "POPULACAO inválida. Certifique-se de que o body da requisição possui a a quantidade total exata de habitantes no campo (populacao).",
     });
     return;
-  } else if (!estado.genero) {
+  } else if (!estado.dtAniversario) {
     res.status(400).send({
       message:
-        "Genero inválido. Certifique-se de que o body da requisição possui a GENERO...",
+        "DATA DE ANIVERSARIO DA CIDADE inválida. Certifique-se de que o body da requisição possui a data exata do aniversario da cidade no campo (dtAniverdario).",
     });
     return;
   }
 
-  lista.push(estado);
-  res.status(201).json({ message: "Musica cadastrada com sucesso..." });
+  lista.push(cidade);
+  res.status(201).json({ message: "Cidade cadastrada com sucesso..." });
 });
 
 router.put("/lista/:id", (req, res) => {
-  const estado = req.body;
+  const cidade = req.body;
   const id = req.params.id - 1;
-  lista[id] = estado;
-  res.status(200).json({ message: `Musica alterada: ${lista[id]}` });
+  lista[id] = cidade;
+  res
+    .status(200)
+    .json({ message: `Dados da Cidade alterados com sucesso: ${lista[id]}` });
 });
 
 router.delete("/lista/:id", (req, res) => {
