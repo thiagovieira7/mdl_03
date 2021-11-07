@@ -6,19 +6,17 @@ const port = 3001;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res
-    .status(200)
-    .json({ message: "Escolha entre /carros, /cerveja, /musica." });
+  res.status(200).json({ message: "Escolha entre /paises, /estado, /cidade." });
 });
 
-const cervejaRouter = require("./cerveja");
-app.use("/cerveja", cervejaRouter);
+const cervejaRouter = require("./paises");
+app.use("/paises", cervejaRouter);
 
-const timeRouter = require("./carros");
-app.use("/carros", timeRouter);
+// const timeRouter = require("./estadso");
+// app.use("/estados", timeRouter);
 
-const musicaRouter = require("./musica");
-app.use("/musica", musicaRouter);
+// const musicaRouter = require("./cidades");
+// app.use("/cidades", musicaRouter);
 
 app.listen(port, () => {
   console.info(`App rodando em http://localhost:${port}`);
