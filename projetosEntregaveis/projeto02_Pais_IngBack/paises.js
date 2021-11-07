@@ -44,26 +44,26 @@ router.get("/nome", (req, res) => {
 });
 
 router.post("/lista", (req, res) => {
-  const pais = req.body;
-  if (!pais.nome) {
+  const Npais = req.body;
+  if (!Npais.nome) {
     res.status(400).send({
       message:
         "NOME DO PAÍS inválido. Certifique-se que o body da requisição possui o NOME correto do (pais).",
     });
     return;
-  } else if (!pais.populacao) {
+  } else if (!Npais.populacao) {
     res.status(400).send({
       message:
         "POPULAÇÃO inválida. Certifique-se de que o body da requisição possui o numero total de habitantes no campo (populacao).",
     });
     return;
-  } else if (!pais.liguaMae) {
+  } else if (!Npais.liguaMae) {
     res.status(400).send({
       message:
         "IDIOMA NATIVO inválida. Certifique-se de que o body da requisição possui a informação da lingua nativa corretamente no campo (linguaMae).",
     });
     return;
-  } else if (!pais.pib) {
+  } else if (!Npais.pib) {
     res.status(400).send({
       message:
         "PIB inválido. Certifique-se de que o body da requisição possui a informação do produto interno bruto no campo (pib).",
@@ -71,8 +71,8 @@ router.post("/lista", (req, res) => {
     return;
   }
 
-  lista.push(pais);
-  res.status(201).json({ message: "País cadastradO com sucesso..." });
+  lista.push(Npais);
+  res.status(201).json({ message: "País cadastrado com sucesso..." });
 });
 
 router.put("/lista/:id", (req, res) => {
