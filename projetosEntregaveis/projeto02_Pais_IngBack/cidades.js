@@ -51,7 +51,7 @@ router.post("/lista", (req, res) => {
         "NOME inválido. Certifique-se de que o body da requisição possui o nome da cidade certa no campo (nome).",
     });
     return;
-  } else if (!nome.qtdBairros) {
+  } else if (!cidade.qtdBairros) {
     res.status(400).send({
       message:
         "QUANTIDADE DE BAIRROS inválido. Certifique-se de que o body da requisição possui a quantidade de bairros certo no campo (qtdBairros).",
