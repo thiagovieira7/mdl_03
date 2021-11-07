@@ -1,41 +1,41 @@
 const express = require("express");
 const router = express.Router();
 
-let listaMusica = [
+let lista = [
   {
-    musica: "mulher de fases",
-    autor: "raimundos",
-    ano: 1996,
-    genero: "rock",
+    nome: "Paraná",
+    regiao: "Sul",
+    populacao: 11597484,
+    valor_salario_minimo: 1101.95
   },
 ];
 
 router.get("/", (req, res) => {
-  res.status(200).json({ message: "Baile começou..." });
+  res.status(200).json({ message: "Dados por estado" });
 });
 
-router.get("/listamusica", (req, res) => {
-  res.json(listaMusica);
+router.get("/lista", (req, res) => {
+  res.json(lista);
 });
 
-router.get("/listamusica/:id", (req, res) => {
+router.get("/lista/:id", (req, res) => {
   const id = req.params.id - 1;
-  res.json(listaMusica[id]);
+  res.json(lista[id]);
 });
 
-router.get("/listamusica/:disco", (req, res) => {
-  res.status(200).json(listaMusica);
+router.get("/lista/:disco", (req, res) => {
+  res.status(200).json(lista);
 });
 
-router.get("/:disco", (req, res) => {
-  const disco = req.params.disco;
-  const dance = listaMusica.find((item) => item.disco === disco);
-  res.status(200).json(dance);
+router.get("/:nome", (req, res) => {
+  const nome = req.params.nome;
+  const estado = lista.find((item) => item.nome === nome);
+  res.status(200).json(estado);
 });
 
-router.get("/disco", (req, res) => {
-  const disco = req.params.disco;
-  const index = listaMusica.findIndex((item) => item.disco === marca);
+router.get("/nome", (req, res) => {
+  const nomeEstado = req.params.nome;
+  const index = lista.findIndex((item) => item.nomeEstado === nome);
   if (index == -1) {
     res.status(204);
     return;
@@ -43,27 +43,27 @@ router.get("/disco", (req, res) => {
   res.status(200).json({ index: index });
 });
 
-router.post("/listamusica", (req, res) => {
-  const dance = req.body;
-  if (!dance.musica) {
+router.post("/lista", (req, res) => {
+  const estado = req.body;
+  if (!estado.musica) {
     res.status(400).send({
       message:
         "Musica inválida. Certifique-se de que o body da requisição possui a MUSICA...",
     });
     return;
-  } else if (!dance.autor) {
+  } else if (!estado.autor) {
     res.status(400).send({
       message:
         "Autor inválido. Certifique-se de que o body da requisição possui a AUTOR...",
     });
     return;
-  } else if (!dance.ano) {
+  } else if (!estado.ano) {
     res.status(400).send({
       message:
         "Ano inválido. Certifique-se de que o body da requisição possui a ANO...",
     });
     return;
-  } else if (!dance.genero) {
+  } else if (!estado.genero) {
     res.status(400).send({
       message:
         "Genero inválido. Certifique-se de que o body da requisição possui a GENERO...",
@@ -71,22 +71,22 @@ router.post("/listamusica", (req, res) => {
     return;
   }
 
-  listaMusica.push(dance);
+  lista.push(estado);
   res.status(201).json({ message: "Musica cadastrada com sucesso..." });
 });
 
-router.put("/listamusica/:id", (req, res) => {
-  const dance = req.body;
+router.put("/lista/:id", (req, res) => {
+  const estado = req.body;
   const id = req.params.id - 1;
-  listaMusica[id] = dance;
-  res.status(200).json({ message: `Musica alterada: ${listaMusica[id]}` });
+  lista[id] = estado;
+  res.status(200).json({ message: `Musica alterada: ${lista[id]}` });
 });
 
-router.delete("/listamusica/:id", (req, res) => {
+router.delete("/lista/:id", (req, res) => {
   const id = req.params.id - 1;
-  delete listaMusica[id];
-  console.log(listaMusica[id]);
-  res.status(200).json(listaMusica);
+  delete lista[id];
+  console.log(lista[id]);
+  res.status(200).json(lista);
 });
 
 module.exports = router;
