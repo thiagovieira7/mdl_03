@@ -60,7 +60,7 @@ router.post("/lista", (req, res) => {
   } else if (!estado.populacao) {
     res.status(400).send({
       message:
-        "POPULACAO inválida. Certifique-se de que o body da requisição possui a informação correta no campo (populacao).",
+        "POPULAÇÃO inválida. Certifique-se de que o body da requisição possui a informação correta no campo (populacao).",
     });
     return;
   } else if (!estado.vlSalarioMin) {

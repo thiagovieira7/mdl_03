@@ -4,8 +4,8 @@ const router = express.Router();
 let lista = [
   {
     nome: "Brasil",
-    população: 213300000,
-    lingua_mae: "Português Brasileiro",
+    populacao: 213300000,
+    linguaMae: "Português Brasileiro",
     pib: 7400000,
   },
 ];
@@ -54,13 +54,13 @@ router.post("/lista", (req, res) => {
   } else if (!pais.populacao) {
     res.status(400).send({
       message:
-        "POPULACAO inválida. Certifique-se de que o body da requisição possui o numero total de habitantes no campo (populacao).",
+        "POPULAÇÃO inválida. Certifique-se de que o body da requisição possui o numero total de habitantes no campo (populacao).",
     });
     return;
-  } else if (!pais.ligua_mae) {
+  } else if (!pais.liguaMae) {
     res.status(400).send({
       message:
-        "IDIOMA NATIVO inválida. Certifique-se de que o body da requisição possui a informação da lingua nativa corretamente no campo (lingua_mae).",
+        "IDIOMA NATIVO inválida. Certifique-se de que o body da requisição possui a informação da lingua nativa corretamente no campo (linguaMae).",
     });
     return;
   } else if (!pais.pib) {

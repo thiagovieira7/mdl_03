@@ -23,7 +23,7 @@ router.get("/lista/:id", (req, res) => {
   res.json(lista[id]);
 });
 
-router.get("/lista/:disco", (req, res) => {
+router.get("/lista/:nome", (req, res) => {
   res.status(200).json(lista);
 });
 
@@ -60,7 +60,7 @@ router.post("/lista", (req, res) => {
   } else if (!estado.populacao) {
     res.status(400).send({
       message:
-        "POPULACAO inválida. Certifique-se de que o body da requisição possui a a quantidade total exata de habitantes no campo (populacao).",
+        "POPULAÇÃO inválida. Certifique-se de que o body da requisição possui a a quantidade total exata de habitantes no campo (populacao).",
     });
     return;
   } else if (!estado.dtAniversario) {
