@@ -1,6 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
+// const sequence = {
+//   __id: 1,
+//   get id() {
+//     return this.__id++;
+//   },
+// };
+
 let lista = [
   {
     nome: "Brasil",
@@ -23,10 +30,6 @@ router.get("/lista/:id", (req, res) => {
   res.json(lista[id]);
 });
 
-router.get("/lista/:nome", (req, res) => {
-  res.status(200).json(lista);
-});
-
 router.get("/:nome", (req, res) => {
   const nome = req.params.nome;
   const pais = lista.find((item) => item.nome === nome);
@@ -45,6 +48,20 @@ router.get("/nome", (req, res) => {
 
 router.post("/lista", (req, res) => {
   const pais = req.body;
+  // function salvarPais(lista) {
+  //   if (!lista.id) lista.id = sequence.id;
+  //   lista[lista.id] = lista;
+  //   return lista;
+  // }
+
+  // const paisIndi = salvarPais({
+  //   id: req.body.id,
+  //   nome: req.body.nome,
+  //   populacao: req.body.populacao,
+  //   linguaMae: req.body.linguaMae,
+  //   pib: req.body.pib,
+  // });
+
   if (!pais.nome) {
     res.status(400).send({
       message:
